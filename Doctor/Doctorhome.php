@@ -24,12 +24,63 @@
 
     <div class="body">
         <div class="left-body">
-           <p>Hello</p>
+            <div class="consultationrem">
+                <p>Consultation Remianing</p>
+            </div>
+            <div class="tableConsrem">
+                <div class="row1">
+                    <p>MITHUN HALDER</p>
+                    <P>011201041</P>
+                    <P>STUDENT</P>
+                    <P>Fever</P>
+                </div>
+                <div class="row1">
+                    <p>MITHUN HALDER</p>
+                    <P>011201041</P>
+                    <P>STUDENT</P>
+                    <P>Fever</P>
+                </div>
+                <div class="row1">
+                    <p>MITHUN HALDER</p>
+                    <P>011201041</P>
+                    <P>STUDENT</P>
+                    <P>Fever</P>
+                </div>
+                <div class="row1">
+                    <p>MITHUN HALDER</p>
+                    <P>011201041</P>
+                    <P>STUDENT</P>
+                    <P>Fever</P>
+                </div>
+            </div>
         </div>
 
         <div class="right-body">
-           
-          <p>Hello</p>
+
+            <div class="consultationcomp">
+                <p>Consultation Completed</p>
+            </div>
+            <div class="tableConscomp">
+                <div class="rowComp">
+                    <p>MITHUN HALDER</p>
+                    <P>011201041</P>
+                    <P>STUDENT</P>
+
+                </div>
+                <div class="rowComp">
+                    <p>MITHUN HALDER</p>
+                    <P>011201041</P>
+                    <P>STUDENT</P>
+
+                </div>
+                <div class="rowComp">
+                    <p>MITHUN HALDER</p>
+                    <P>011201041</P>
+                    <P>STUDENT</P>
+
+                </div>
+
+            </div>
         </div>
     </div>
 
