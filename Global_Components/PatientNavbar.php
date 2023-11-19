@@ -14,16 +14,16 @@
 
     <!-- this code is for navbar -->
 
-    <div class="nav">
+    <div id="navbar_custom">
         <div class="nav-img">
             <a href=""><img src="../images/Frame 2.svg" alt=""></a>
         </div>
-        <div class="nav-link">
+        <div id="nav_link_custom">
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">Appointment</a></li>
-                <li><a href="">Records</a></li>
-                <li><a href="">FAQ</a></li>
+                <li><a href="../Patient/Patient_home.php">Home</a></li>
+                <li><a href="../Patient/patientAppointmentForm.php">Appointment</a></li>
+                <li><a href="../Patient/patients_record.php">Records</a></li>
+                <li><a href="../Patient/faq.php">FAQ</a></li>
                 <li><a href="">Forum</a></li>
 
             </ul>

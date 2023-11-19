@@ -5,7 +5,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.nav{
+#navbar_custom{
    
     display: flex;
     align-items: center;
@@ -16,21 +16,22 @@
     
 }
 
-.nav-link ul{
+#nav_link_custom ul{
     display: flex;
     list-style-type: none;
     gap: 20px;
     align-items: center;
+    margin-bottom: 0;
 }
 
-.nav-link ul li a{
+#nav_link_custom ul li a{
     text-decoration: none;
     font-weight: bold;
     color: #121212;
 
 }
 
-.nav-link{
+#nav_link_custom{
     margin: 0 3% 0 3%;
 }
 
@@ -39,6 +40,7 @@
     list-style-type: none;
     gap: 10px;
     align-items: center;
+    margin-bottom: 0;
 }
 
 .nav-icons ul li a{

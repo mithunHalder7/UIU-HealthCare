@@ -16,17 +16,17 @@
 
     <!-- this code is for navbar -->
 
-    <div class="nav">
+    <div id="navbar_custom">
         <div class="nav-img">
             <a href=""><img src="../images/Frame 2.svg" alt=""></a>
         </div>
-        <div class="nav-link">
+        <div id="nav_link_custom">
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">Requests</a></li>
-                <li><a href="">Records</a></li>
-                <li><a href="">Prescriptions</a></li>
-                <li><a href="">FAQ</a></li>
+                <li><a href="../Doctor/Doctorhome.php">Home</a></li>
+                <li><a href="../Doctor/DocRequests.php">Requests</a></li>
+                <li><a href="../Doctor/patients_record.php">Records</a></li>
+                <li><a href="../Doctor/prescription.php">Prescriptions</a></li>
+                <li><a href="../Doctor/faq.php">FAQ</a></li>
 
             </ul>
 
