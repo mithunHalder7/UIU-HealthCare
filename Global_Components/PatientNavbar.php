@@ -1,5 +1,19 @@
 <?php
 session_start();
+
+
+// Logout logic
+if (isset($_GET['logout'])) {
+    // Clear all session variables
+    session_unset();
+
+    // Destroy the session
+    session_destroy();
+
+    // Redirect to the login page
+    header("Location:../login.php");
+    exit();
+}
 // Check if the user is logged in
 if (!isset($_SESSION["user_id"])) {
     // Redirect to the login page if not logged in
@@ -23,44 +37,7 @@ $navbarImagePath = "../images/" . $dynamicPart;
     <link rel="stylesheet" href="../Global_Components/PatientNavbar.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
-    <style>
-        /* Ensure the map container has dimensions */
-        #map {
-            height: 400px;
-            display: none;
-            /* Hide the map initially */
-        }
-
-        #closeMapButton {
-
-            display: none;
-            /* Hide the button initially */
-        }
-
-        .profile-picture {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .dropdown {
-            display: none;
-            position: absolute;
-            top: 60px;
-            /* Adjust this value based on your layout */
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 1;
-        }
-
-        .dropdown a {
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            color: #333;
-        }
-    </style>
+   
 </head>
 
 <body>
@@ -88,7 +65,7 @@ $navbarImagePath = "../images/" . $dynamicPart;
                     <img src="<?php echo $navbarImagePath; ?>" alt="Profile" class="profile-picture" id="profilePicture">
                     <!-- Dropdown menu -->
                     <div class="dropdown" id="dropdown">
-                        <a href="#">Logged Out</a>
+                        <a href="?logout">Logout</a>
                     </div>
                 </li>
             </ul>

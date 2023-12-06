@@ -1,6 +1,9 @@
 <?php
+session_start();
+include '../db.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
+    $user_id = $_SESSION['user_id'];
     $studentId = $_POST["student_id"];
     $age = $_POST["age"];
     $date = $_POST["date"];
@@ -12,23 +15,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // TODO: Add validation and sanitization for the form data as needed
 
     // Now, you can perform actions like saving the appointment to a database, sending emails, etc.
-    
-    // For example, you can echo the details for testing purposes
-    echo "Appointment Details: <br>";
-    echo "Student ID: $studentId <br>";
-    echo "Age: $age <br>";
-    echo "Date: $date <br>";
-    echo "Time: $time <br>";
-    echo "Email: $email <br>";
-    echo "Contact: $contact <br>";
-    echo "Reason: $reason <br>";
 
-    // TODO: Add your logic to save the appointment to the database or take other actions as needed
-    
+    // Prepare the SQL statement to insert the appointment details
+    $sql = "INSERT INTO appointments (user_id, student_id, age, date, time, contact, reason, status) 
+   VALUES ($user_id, '$studentId', $age, '$date', '$time', '$contact', '$reason', 'Pending')";
+
+    // Execute the SQL statement
+    if ($conn->query($sql) === TRUE) {
+        // Display a toaster notification using JavaScript
+        echo "<script>
+                alert('Appointment created successfully!');
+                window.location.href = '../Patient/patientAppointmentForm.php'; // Redirect to the form
+             </script>";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+
+
+    // Close the database connection
+    $conn->close();
 } else {
     // If the form is not submitted, you can add any initial code here
     // For example, you might want to redirect the user to the form page
     header("Location: ../Patient/patientAppointmentForm.php");
     exit();
 }
-?>

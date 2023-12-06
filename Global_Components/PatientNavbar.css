@@ -97,3 +97,43 @@
 .nav-search form button:hover i{
     color: rgb(162, 163, 163);
 }
+
+ /* Ensure the map container has dimensions */
+ #map {
+    height: 400px;
+    display: none;
+    /* Hide the map initially */
+}
+
+#closeMapButton {
+
+    display: none;
+    /* Hide the button initially */
+}
+
+.profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 60px;
+    /* Adjust this value based on your layout */
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    margin-right: 50px;
+
+
+}
+
+.dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}

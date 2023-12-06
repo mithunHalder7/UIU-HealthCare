@@ -1,3 +1,32 @@
+<?php
+session_start();
+
+
+// Logout logic
+if (isset($_GET['logout'])) {
+    // Clear all session variables
+    session_unset();
+
+    // Destroy the session
+    session_destroy();
+
+    // Redirect to the login page
+    header("Location:../login.php");
+    exit();
+}
+// Check if the user is logged in
+if (!isset($_SESSION["user_id"])) {
+    // Redirect to the login page if not logged in
+    header("Location:../login.php");
+    exit();
+}
+
+$dynamicPart = $_SESSION["user_image_path"];
+$navbarImagePath = "../images/" . $dynamicPart;
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,12 +68,43 @@
         </div>
         <div class="nav-icons">
             <ul>
-                <li><img src="../images/Notification.svg" alt=""></li>
-                <li><a href="../Doctor/doc_sProfile.php"><img src="../images/Ellipse 50.svg" alt=""></a></li>
-                <li><img src="../images/Settings.svg" alt=""></li>
+                <li>
+                    <!-- Add an ID to the profile picture for JavaScript manipulation -->
+                    <img src="<?php echo $navbarImagePath; ?>" alt="Profile" class="profile-picture" id="profilePicture">
+                    <!-- Dropdown menu -->
+                    <div class="dropdown" id="dropdown">
+                        <a href="?logout">Logout</a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
+
+    <script>
+        // Add JavaScript code for the profile picture dropdown menu
+        document.addEventListener("DOMContentLoaded", function() {
+            const profilePicture = document.getElementById("profilePicture");
+            const dropdown = document.getElementById("dropdown");
+
+            profilePicture.addEventListener("click", function() {
+                // Toggle the dropdown menu
+                if (dropdown.style.display === "block") {
+                    dropdown.style.display = "none";
+                } else {
+                    dropdown.style.display = "block";
+                }
+            });
+
+            // Close the dropdown menu if the user clicks outside of it
+            window.addEventListener("click", function(event) {
+                if (!event.target.matches('.profile-picture')) {
+                    if (dropdown.style.display === "block") {
+                        dropdown.style.display = "none";
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
