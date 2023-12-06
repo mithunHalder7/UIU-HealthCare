@@ -1,3 +1,27 @@
+<?php
+// Assuming you have a database connection established in db.php
+include '../db.php';
+
+// Fetch the desired columns from the appointments table by joining with the users table
+$sql = "SELECT appointments.appointment_id, user.name, appointments.date, appointments.time, appointments.status
+        FROM appointments
+        INNER JOIN user ON appointments.user_id = user.id";
+
+$result = mysqli_query($conn, $sql);
+
+// Check for query execution success
+if ($result) {
+    // Fetch all rows as an associative array
+    $appointments = mysqli_fetch_all($result, MYSQLI_ASSOC);
+} else {
+    // Handle the error if query execution fails
+    echo "Error: " . mysqli_error($conn);
+}
+
+// Close the database connection
+mysqli_close($conn);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +30,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="DocRequests.css">
-
 </head>
 
 <body>
@@ -20,60 +43,85 @@
     </div>
 
     <div class="tableContainer">
-        <div class="PatientRequests">
-            <p>MITHUN HALDER</p>
-            <p>011201041</p>
-            <p>Student</p>
-            <p>Date Options</p>
-            <p>REGULAR</p>
-            <input type="button" class="cancel" value="Cancel">
-            <input type="button" class="accept" value="Accept">
-            <p></p>
-        </div>
-        <div class="PatientRequests">
-            <p>MITHUN HALDER</p>
-            <p>011201041</p>
-            <p>Student</p>
-            <p>Date Options</p>
-            <p>REGULAR</p>
-            <input type="button" class="cancel" value="Cancel">
-            <input type="button" class="accept" value="Accept">
-            <p></p>
-        </div>
-        <div class="PatientRequests">
-            <p>MITHUN HALDER</p>
-            <p>011201041</p>
-            <p>Student</p>
-            <p>Date Options</p>
-            <p>REGULAR</p>
-            <input type="button" class="cancel" value="Cancel">
-            <input type="button" class="accept" value="Accept">
-            <p></p>
-        </div>
-        <div class="PatientRequests">
-            <p>MITHUN HALDER</p>
-            <p>011201041</p>
-            <p>Student</p>
-            <p>Date Options</p>
-            <p>REGULAR</p>
-            <input type="button" class="cancel" value="Cancel">
-            <input type="button" class="accept" value="Accept">
-            <p></p>
-        </div>
-        <div class="PatientRequests">
-            <p>MITHUN HALDER</p>
-            <p>011201041</p>
-            <p>Student</p>
-            <p>Date Options</p>
-            <p>REGULAR</p>
-            <input type="button" class="cancel" value="Cancel">
-            <input type="button" class="accept" value="Accept">
-            <p></p>
-        </div>
-
+        <table>
+            <thead>
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($appointments as $appointment) : ?>
+                    <tr>
+                        <td><?php echo $appointment['appointment_id']; ?></td>
+                        <td><?php echo $appointment['name']; ?></td>
+                        <td><?php echo $appointment['date']; ?></td>
+                        <td><?php echo $appointment['time']; ?></td>
+                        <td id="status-<?php echo $appointment['appointment_id']; ?>"><?php echo $appointment['status']; ?></td>
+                        <td>
+                            <input type="button" class="cancel" value="Cancel" onclick="updateStatus('<?php echo $appointment['appointment_id']; ?>', 'Cancelled')">
+                            <input type="button" class="accept" value="Accept" onclick="updateStatus('<?php echo $appointment['appointment_id']; ?>', 'Accepted')">
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 
-    <?php include '../Global_Components/footer.php'?>
+    <?php include '../Global_Components/footer.php' ?>
+
+
+    <script>
+        function updateStatus(appointmentId, newStatus) {
+            const formData = new FormData();
+            formData.append("appointment_id", appointmentId);
+            formData.append("status", newStatus);
+
+            fetch('update_status.php', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update the status in the HTML table
+                        const statusCell = document.getElementById(`status-${appointmentId}`);
+                        statusCell.textContent = newStatus;
+                    } else {
+                        console.error('Error:', data.error);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function fetchUpdatedDataAndRefreshTable() {
+            // Fetch updated data from the server
+            fetch('fetch_updated_data.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Replace the entire table content with the updated data
+                        const tableContainer = document.querySelector('.tableContainer');
+                        tableContainer.innerHTML = data.tableContent;
+                    } else {
+                        console.error('Error fetching updated data:', data.error);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error fetching updated data:', error);
+                });
+        }
+
+        // Call fetchUpdatedDataAndRefreshTable at regular intervals
+        setInterval(fetchUpdatedDataAndRefreshTable, 5000); // Adjust the interval as needed (e.g., every 5 seconds)
+    </script>
+
 </body>
 
 </html>

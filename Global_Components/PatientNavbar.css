@@ -5,6 +5,32 @@
     font-family: 'Poppins', sans-serif;
 }
 
+/* Global Styles */
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    background-color: #FCA311;
+    text-align: center;
+    padding: 1em;
+}
+
+/* Page-Specific Styles */
+
+/* Add specific styles for pages that require adjustments */
+
+
+
 #navbar_custom{
    
     display: flex;
