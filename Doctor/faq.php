@@ -27,12 +27,12 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Question 1: What is Lorem Ipsum?
+            Question 1: How to make an online appointment through the system?
           </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
           <div class="accordion-body">
-            <input type="text" class="form-control" placeholder="Your answer here">
+            <input type="text" class="form-control" placeholder="Follow the given path: Login->Appointment">
           </div>
         </div>
       </div>
@@ -41,12 +41,12 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingTwo">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            Question 2: Why do we use it?
+            Question 2: What services the university healthcare offers?
           </button>
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
           <div class="accordion-body">
-            <input type="text" class="form-control" placeholder="Your answer here">
+            <input type="text" class="form-control" placeholder="Primary Treatment, Regular checkup,Basic Sugesstion">
           </div>
         </div>
       </div>
@@ -55,12 +55,12 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingThree">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            Question 3: How does it work?
+            Question 3: What should I do in case of medical emergency?
           </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
           <div class="accordion-body">
-            <input type="text" class="form-control" placeholder="Your answer here">
+            <input type="text" class="form-control" placeholder="You just need to come our health center.We'll provide primary treatment first then other formalities.">
           </div>
         </div>
       </div>
@@ -69,12 +69,12 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFour">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-            Question 4: Is it free to use?
+            Question 4: What are the regular office hours for the doctors?
           </button>
         </h2>
         <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
           <div class="accordion-body">
-            <input type="text" class="form-control" placeholder="Your answer here">
+            <input type="text" class="form-control" placeholder="Our service is available from 9:00 am to 4:30 pm on working days">
           </div>
         </div>
       </div>
@@ -83,12 +83,12 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFive">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-            Question 5: Can I customize the styles?
+            Question 5: How much does it cost to visit a doctor at the university healthcare center?
           </button>
         </h2>
         <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
           <div class="accordion-body">
-            <input type="text" class="form-control" placeholder="Your answer here">
+            <input type="text" class="form-control" placeholder="It costs only 50 Taka">
           </div>
         </div>
       </div>

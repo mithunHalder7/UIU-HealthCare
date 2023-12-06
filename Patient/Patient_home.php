@@ -25,7 +25,7 @@
     <!-- this code is for payment div-->
     <div class="payment">
         <div class="current-balance">
-            <p>Current Balance : 5000 TK</p>
+            <p>Due Balance : 50 TK</p>
         </div>
         <div class="online-payment">
             <p>For Online Payment:</p>
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="element1">
-                        <h5>Medicines</h5>
+                        <h5>Tests</h5>
                         <div class="element1div">
                             <p>Flagyl 0+1+0</p>
                             <p>Moxacil 1+1+1</p>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="row2">
                     <div class="element1">
-                        <h5>Medicines</h5>
+                        <h5>General Advice</h5>
                         <div class="element1div">
                             <p>Flagyl 0+1+0</p>
                             <p>Moxacil 1+1+1</p>

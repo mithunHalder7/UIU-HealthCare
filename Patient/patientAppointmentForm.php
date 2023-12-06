@@ -12,78 +12,72 @@
   <title>Patient's Appointment form</title>
 </head>
 
+<html>
+
 <body>
   <?php include '../Global_Components/PatientNavbar.php'; ?>
   <br>
 
-  <div class="container mt-4">
-    <div class="d-flex flex-column ">
-      <!-- 1st row -->
-      <div class="d-flex mb-2">
-        <div class="me-2" style="width: 45%;">
-          <label for="Name" class="custom-label">Student ID</label>
 
-          <input id="password" class="form-control custom-input1" type="number" placeholder="011******">
+  <form action="process_appointment.php" method="post">
+    <div class="container mt-4">
+      <div class="d-flex flex-column">
+        <!-- 1st row -->
+        <div class="d-flex mb-2">
+          <div class="me-2" style="width: 45%;">
+            <label for="student_id" class="custom-label">Student ID</label>
+            <input name="student_id" class="form-control custom-input1" type="text" placeholder="011******">
+          </div>
+          <div style="width: 45%;">
+            <label for="age">Age</label>
+            <input name="age" class="form-control custom-input1" type="text" placeholder="">
+          </div>
         </div>
-        <div style="width: 45%;">
-          <label for="confirm-password">Age</label>
-          <input id="confirm-password" class="form-control custom-input1" type="number" placeholder="">
+
+        <br>
+
+        <!-- 2nd row -->
+
+        <div class="d-flex mb-2">
+          <div class="me-2" style="width: 45%;">
+            <label for="date" class="custom-label">Date</label>
+            <input name="date" class="form-control custom-input1" type="date" placeholder="">
+          </div>
+          <div style="width: 45%;">
+            <label for="time">Time</label>
+            <input name="time" class="form-control custom-input1" type="time" placeholder="">
+          </div>
+        </div>
+
+        <br>
+        <!-- 3rd row -->
+        <div class="d-flex mb-2">
+          <div class="me-2" style="width: 45%;">
+            <label for="email" class="custom-label">Email</label>
+            <input name="email" class="form-control custom-input1" type="email" placeholder="*********@uiu.ac.bd">
+          </div>
+          <div style="width: 45%;">
+            <label for="contact">Contact</label>
+            <input name="contact" class="form-control custom-input1" type="number" placeholder="+880**********">
+          </div>
+        </div>
+        <br>
+
+        <!-- 4th row -->
+        <div class="d-flex mb-2">
+          <div class="me-2" style="width: 100%;">
+            <label for="reason" class="custom-label">Reason for Appointment</label>
+            <textarea name="reason" class="form-control custom-input4" rows="4" placeholder="Enter your reason for the appointment" style="width: 1010px; height: 200px;"></textarea>
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-top: 100px;margin-right: 70px; margin-bottom: 100px;">
+          <button class="btn btn-primary me-md-2" type="button" style="background-color: #F99417; border: none;">Cancel</button>
+          <button class="btn btn-primary" type="submit" style="background-color: #F99417; border: none;">Save changes</button>
         </div>
       </div>
-
-      <br>
-
-      <!-- 2nd row -->
-
-      <div class="d-flex mb-2">
-        <div class="me-2" style="width: 45%;">
-          <label for="Name" class="custom-label">Date</label>
-          <input id="password" class="form-control custom-input1" type="date" placeholder="">
-        </div>
-        <div style="width: 45%;">
-          <label for="confirm-password">Time</label>
-          <input id="confirm-password" class="form-control custom-input1" type="time" placeholder="">
-        </div>
-      </div>
-
-      <br>
-      <!-- 3rd row -->
-      <div class="d-flex mb-2">
-        <div class="me-2" style="width: 45%;">
-          <label for="Name" class="custom-label">Email</label>
-          <input id="password" class="form-control custom-input1" type="email" placeholder="*********@uiu.ac.bd">
-        </div>
-        <div style="width: 45%;">
-          <label for="confirm-password">Contact</label>
-          <input id="confirm-password" class="form-control custom-input1" type="number" placeholder="+880**********">
-        </div>
-      </div>
-      <br>
-
-      <!-- 4th row -->
-      <div class="d-flex mb-2">
-        <div class="me-2" style="width: 100%;">
-          <label for="Name" class="custom-label">Reason for Appointment</label>
-          <textarea class="form-control custom-input4" rows="4" placeholder="Enter your reason for the appointment" style="width: 1170px; height: 200px;"></textarea>
-        </div>
-      </div>
-
-
-
-
-
-
-
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-top: 100px;margin-right: 70px; margin-bottom: 100px;">
-        <button class="btn btn-primary me-md-2" type="button" style="background-color: #F99417; border: none;">Cancel</button>
-        <button class="btn btn-primary" type="button" style="background-color: #F99417;border:none">Save changes</button>
-      </div>
-
-
     </div>
-
-
-  </div>
+  </form>
 
 
 

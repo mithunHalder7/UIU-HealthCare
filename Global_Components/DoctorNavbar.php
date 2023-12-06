@@ -40,7 +40,7 @@
         <div class="nav-icons">
             <ul>
                 <li><img src="../images/Notification.svg" alt=""></li>
-                <li><img src="../images/Ellipse 50.svg" alt=""></li>
+                <li><a href="../Doctor/doc_sProfile.php"><img src="../images/Ellipse 50.svg" alt=""></a></li>
                 <li><img src="../images/Settings.svg" alt=""></li>
             </ul>
         </div>
