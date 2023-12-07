@@ -3,9 +3,13 @@
 include '../db.php';
 
 // Fetch the desired columns from the appointments table by joining with the users table
-$sql = "SELECT appointments.appointment_id, user.name, appointments.date, appointments.time, appointments.status
+$sql = "SELECT appointments.appointment_id, user.name, 
+        DATE_FORMAT(appointments.date, '%e %M, %Y') as formatted_date,
+        DATE_FORMAT(appointments.time, '%h:%i %p') as formatted_time,
+        appointments.status
         FROM appointments
         INNER JOIN user ON appointments.user_id = user.id";
+
 
 $result = mysqli_query($conn, $sql);
 
@@ -59,9 +63,13 @@ mysqli_close($conn);
                     <tr>
                         <td><?php echo $appointment['appointment_id']; ?></td>
                         <td><?php echo $appointment['name']; ?></td>
-                        <td><?php echo $appointment['date']; ?></td>
-                        <td><?php echo $appointment['time']; ?></td>
-                        <td id="status-<?php echo $appointment['appointment_id']; ?>"><?php echo $appointment['status']; ?></td>
+                        <td><?php echo $appointment['formatted_date']; ?></td>
+                        <td><?php echo $appointment['formatted_time']; ?></td>
+                        <td id="status-<?php echo $appointment['appointment_id']; ?>" class="status-cell">
+                            <?php echo $appointment['status']; ?>
+                        </td>
+
+
                         <td>
                             <input type="button" class="cancel" value="Cancel" onclick="updateStatus('<?php echo $appointment['appointment_id']; ?>', 'Cancelled')">
                             <input type="button" class="accept" value="Accept" onclick="updateStatus('<?php echo $appointment['appointment_id']; ?>', 'Accepted')">
@@ -91,6 +99,9 @@ mysqli_close($conn);
                         // Update the status in the HTML table
                         const statusCell = document.getElementById(`status-${appointmentId}`);
                         statusCell.textContent = newStatus;
+
+                        // Update the style dynamically
+                        updateCellStyle(statusCell, newStatus);
                     } else {
                         console.error('Error:', data.error);
                     }
@@ -98,6 +109,17 @@ mysqli_close($conn);
                 .catch((error) => {
                     console.error('Error:', error);
                 });
+        }
+
+        function updateCellStyle(cell, status) {
+            // Update the style dynamically based on the appointment status
+            if (status === 'Accepted') {
+                cell.style.color = 'green';
+            } else if (status === 'Cancelled') {
+                cell.style.color = 'red';
+            } else {
+                cell.style.color = 'black'; // Default color
+            }
         }
 
         function fetchUpdatedDataAndRefreshTable() {
@@ -109,6 +131,13 @@ mysqli_close($conn);
                         // Replace the entire table content with the updated data
                         const tableContainer = document.querySelector('.tableContainer');
                         tableContainer.innerHTML = data.tableContent;
+
+                        // Update the styles for the new data
+                        const statusCells = document.querySelectorAll('.status-cell');
+                        statusCells.forEach(cell => {
+                            const appointmentId = cell.id.replace('status-', '');
+                            updateCellStyle(cell, data.appointments.find(app => app.appointment_id == appointmentId).status);
+                        });
                     } else {
                         console.error('Error fetching updated data:', data.error);
                     }
