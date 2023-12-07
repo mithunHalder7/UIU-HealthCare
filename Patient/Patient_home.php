@@ -1,3 +1,78 @@
+<?php
+// Assuming you have already established a database connection
+include('../db.php');
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+$user_id = $_SESSION['user_id'];
+
+// Query to fetch medicines and dosages
+$sqlMedicines = "
+SELECT
+    m.medicine_name,
+    mr.dosages
+FROM
+    medicine_records mr
+LEFT JOIN
+    medicines m ON mr.medicine_id = m.medicine_id
+WHERE
+    mr.appointment_id = (SELECT appointment_id
+                        FROM appointments
+                        WHERE user_id = $user_id
+                        ORDER BY date ASC
+                        LIMIT 1)
+";
+
+$resultMedicines = $conn->query($sqlMedicines);
+
+// Query to fetch tests
+$sqlTests = "
+SELECT
+    t.test_name
+FROM
+    test_records tr
+LEFT JOIN
+    tests t ON tr.test_id = t.test_id
+WHERE
+    tr.appointment_id = (SELECT appointment_id
+                        FROM appointments
+                        WHERE user_id = $user_id
+                        ORDER BY date ASC
+                        LIMIT 1)
+";
+
+$resultTests = $conn->query($sqlTests);
+
+// Query to fetch general advice
+$sqlGeneralAdvice = "
+SELECT
+    ga.advice_text
+FROM
+    general_advices_records gar
+LEFT JOIN
+    general_advice ga ON gar.advice_id = ga.advice_id
+WHERE
+    gar.appointment_id = (SELECT appointment_id
+                          FROM appointments
+                          WHERE user_id = $user_id
+                          ORDER BY date ASC
+                          LIMIT 1)
+";
+
+$resultGeneralAdvice = $conn->query($sqlGeneralAdvice);
+
+// Query to fetch appointment dates
+$sqlDates = "
+SELECT DATE_FORMAT(date, '%e %M, %Y') AS formatted_date
+FROM appointments
+WHERE user_id = $user_id
+ORDER BY date DESC
+";
+
+$resultDates = $conn->query($sqlDates);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,17 +121,29 @@
                     <div class="element1">
                         <h5>Medicines</h5>
                         <div class="element1div">
-                            <p>Flagyl 0+1+0</p>
-                            <p>Moxacil 1+1+1</p>
-                            <p>Seclo 1+ 1+ 1</p>
+                            <?php
+                            if ($resultMedicines->num_rows > 0) {
+                                while ($row = $resultMedicines->fetch_assoc()) {
+                                    echo "<p>{$row['medicine_name']} {$row['dosages']}</p>";
+                                }
+                            } else {
+                                echo "<p>No medicines found</p>";
+                            }
+                            ?>
                         </div>
                     </div>
                     <div class="element1">
                         <h5>Tests</h5>
                         <div class="element1div">
-                            <p>Flagyl 0+1+0</p>
-                            <p>Moxacil 1+1+1</p>
-                            <p>Seclo 1+ 1+ 1</p>
+                            <?php
+                            if ($resultTests->num_rows > 0) {
+                                while ($row = $resultTests->fetch_assoc()) {
+                                    echo "<p>{$row['test_name']}</p>";
+                                }
+                            } else {
+                                echo "<p>No tests found</p>";
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -64,9 +151,15 @@
                     <div class="element1">
                         <h5>General Advice</h5>
                         <div class="element1div">
-                            <p>Flagyl 0+1+0</p>
-                            <p>Moxacil 1+1+1</p>
-                            <p>Seclo 1+ 1+ 1</p>
+                            <?php
+                            if ($resultGeneralAdvice->num_rows > 0) {
+                                while ($row = $resultGeneralAdvice->fetch_assoc()) {
+                                    echo "<p>{$row['advice_text']}</p>";
+                                }
+                            } else {
+                                echo "<p>No general advice found</p>";
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -78,23 +171,32 @@
                 Visit History
             </div>
             <div class="historyall">
-
-                <div class="history">12 July, 2023</div>
-                <div class="history">12 July, 2023</div>
-                <div class="history">12 July, 2023</div>
-
+                <?php
+                if ($resultDates->num_rows > 0) {
+                    while ($row = $resultDates->fetch_assoc()) {
+                        echo "<div class='history'>{$row['formatted_date']}</div>";
+                    }
+                } else {
+                    echo "<p>No visit history found</p>";
+                }
+                ?>
             </div>
-
         </div>
     </div>
 
-
-    <!-- this code is for footer -->
-
-
-
-    <?php include '../Global_Components/footer.php'; ?>
+    <!-- Add your footer include here -->
 
 </body>
 
 </html>
+
+<!-- this code is for footer -->
+
+
+
+<?php include '../Global_Components/footer.php'; ?>
+
+</body>
+
+</html>
+

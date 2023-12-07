@@ -1,8 +1,9 @@
 <?php
-session_start();
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-// Logout logic
 if (isset($_GET['logout'])) {
     // Clear all session variables
     session_unset();

@@ -1,3 +1,17 @@
+<?php
+// Assuming you have a database connection
+include("../db.php");
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+
+// Fetch FAQs from the database
+$sql = "SELECT id, question, answer FROM faq";
+$result = $conn->query($sql);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,78 +37,35 @@
     <h1 class="mb-4 text-center">Frequently Asked Questions</h1>
 
     <div class="accordion" id="faqAccordion">
-      <!-- FAQ Item 1 -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Question 1: How to make an online appointment through the system?
-          </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            <input type="text" class="form-control" placeholder="Follow the given path: Login->Appointment">
+
+      <?php
+      // Populate the FAQs dynamically
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+      ?>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading<?php echo $row['id']; ?>">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $row['id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $row['id']; ?>">
+                <?php echo htmlspecialchars($row['question']); ?>
+              </button>
+            </h2>
+            <div id="collapse<?php echo $row['id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $row['id']; ?>" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <?php echo htmlspecialchars($row['answer']); ?>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <!-- FAQ Item 2 -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            Question 2: What services the university healthcare offers?
-          </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            <input type="text" class="form-control" placeholder="Primary Treatment, Regular checkup,Basic Sugesstion">
-          </div>
-        </div>
-      </div>
+      <?php
+        }
+      } else {
+        echo "0 results";
+      }
 
-      <!-- FAQ Item 3 -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingThree">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            Question 3: What should I do in case of medical emergency?
-          </button>
-        </h2>
-        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            <input type="text" class="form-control" placeholder="You just need to come our health center.We'll provide primary treatment first then other formalities.">
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ Item 4 -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingFour">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-            Question 4: What are the regular office hours for the doctors?
-          </button>
-        </h2>
-        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            <input type="text" class="form-control" placeholder="Our service is available from 9:00 am to 4:30 pm on working days">
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ Item 5 -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingFive">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-            Question 5: How much does it cost to visit a doctor at the university healthcare center?
-          </button>
-        </h2>
-        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            <input type="text" class="form-control" placeholder="It costs only 50 Taka">
-          </div>
-        </div>
-      </div>
-
-
-
+      // Close the database connection
+      $conn->close();
+      ?>
 
     </div>
   </div>
